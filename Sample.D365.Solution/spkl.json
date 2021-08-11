@@ -1,0 +1,64 @@
+{
+  "webresources": [
+    {
+      "profile": "default,debug,release",
+      "root": "WebResources\\",
+      "solution": "Sample.D365",
+      "deleteaction": "no",
+      "files": [
+        {
+          "uniquename": "new_/Script/Core/Sample.D365.Core.js",
+          "displayname": "Sample.D365.Core.js",
+          "file": "new_\\Script\\Core\\Sample.D365.Core.js"
+        },
+        {
+          "uniquename": "new_/Script/Core/D365.Core.js",
+          "displayname": "D365.Core.js",
+          "file": "new_\\Script\\Core\\D365.Core.js"
+        }
+      ]
+    }
+  ],
+  "plugins": [
+    {
+      "profile": "default,debug",
+      "solution": "Sample.D365",
+      "assemblypath": "bin\\Debug\\Sample.D365.Plugins.dll"
+    },
+    {
+      "profile": "release",
+      "solution": "Sample.D365",
+      "assemblypath": "bin\\Release\\Sample.D365.Plugins.dll"
+    }
+  ],
+  "workflows": [
+    {
+      "profile": "default,debug",
+      "solution": "Sample.D365",
+      "assemblypath": "bin\\Debug\\Sample.D365.Workflows.dll"
+    },
+    {
+      "profile": "release",
+      "solution": "Sample.D365",
+      "assemblypath": "bin\\Release\\Sample.D365.Workflows.dll"
+    }
+  ],
+  "solutions": [
+    {
+      "profile": "default,debug",
+      "solution_uniquename": "Sample.D365",
+      "packagepath": "Sample.D365\\unmanaged",
+      "solutionpath": "Sample.D365_{0}_{1}_{2}_{3}_unmanaged.zip",
+      "packagetype": "unmanaged",
+      "increment_on_import": false
+    },
+    {
+      "profile": "release",
+      "solution_uniquename": "Sample.D365",
+      "packagepath": "Sample.D365\\managed",
+      "solutionpath": "Sample.D365_{0}_{1}_{2}_{3}_managed.zip",
+      "packagetype": "managed",
+      "increment_on_import": false
+    }
+  ]
+}

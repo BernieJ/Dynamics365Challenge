@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <RootNamespace>Sample.D365.Plugins</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.33" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Sample.D365.Core\Extensions\CollectionExtensions.cs">
+      <Link>Core\Extensions\CollectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\DictionaryExtensions.cs">
+      <Link>Core\Extensions\DictionaryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\EnumExtensions.cs">
+      <Link>Core\Extensions\EnumExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\HashSetExtensions.cs">
+      <Link>Core\Extensions\HashSetExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\IEnumerableExtensions.cs">
+      <Link>Core\Extensions\IEnumerableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\IOrganizationServiceExtensions.cs">
+      <Link>Core\Extensions\IOrganizationServiceExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\ListExtensions.cs">
+      <Link>Core\Extensions\ListExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\ObjectExtensions.cs">
+      <Link>Core\Extensions\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Extensions\StringExtensions.cs">
+      <Link>Core\Extensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Helpers\JsonSerialiserHelper.cs">
+      <Link>Core\Helpers\JsonSerialiserHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Helpers\PluginHelper.cs">
+      <Link>Core\Helpers\PluginHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Logging\DynamicsException.cs">
+      <Link>Core\Logging\DynamicsException.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Logging\DynamicsLogger.cs">
+      <Link>Core\Logging\DynamicsLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Logging\DynamicsTracingService.cs">
+      <Link>Core\Logging\DynamicsTracingService.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Logging\ExceptionExtensions.cs">
+      <Link>Core\Logging\ExceptionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Logging\IDynamicsLogger.cs">
+      <Link>Core\Logging\IDynamicsLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Logging\Logger.cs">
+      <Link>Core\Logging\Logger.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Logging\SourceLocation.cs">
+      <Link>Core\Logging\SourceLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Managers\EntityManager.cs">
+      <Link>Core\Managers\EntityManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Managers\SystemUserManager.cs">
+      <Link>Core\Managers\SystemUserManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Managers\TeamManager.cs">
+      <Link>Core\Managers\TeamManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Core\Services\LazyOrganizationService.cs">
+      <Link>Core\Services\LazyOrganizationService.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Entities\Actions.cs">
+      <Link>Entities\Actions.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Entities\Entities.cs">
+      <Link>Entities\Entities.cs</Link>
+    </Compile>
+    <Compile Include="..\Sample.D365.Entities\OptionSets.cs">
+      <Link>Entities\OptionSets.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+</Project>
