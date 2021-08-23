@@ -54,9 +54,10 @@ function hideIndividualClientDetails(formContext) {
     formContext.getControl('fullname_compositionLinkControl_lastname').setVisible(false);
 }
 
-function validatePreferredMethodOfCommunication() {
-
-    let PreferredMethodOfCommunication = Xrm.Page.getControl('PreferredContactMethodCode').getValue();
+function validatePreferredMethodOfCommunication(executionContext) {
+    var formContext = executionContext.getFormContext();
+    
+    let PreferredMethodOfCommunication = formContext.getControl('preferredcontactmethodcode').getAttribute().getValue();
 
     switch (PreferredMethodOfCommunication) {
         case 1: // Preferred Method = Any
@@ -65,22 +66,22 @@ function validatePreferredMethodOfCommunication() {
         case 2: // Preferred Method = Email
             {
                 clearAllMandatoryFields();
-                Xrm.Page.getAttribute('email').setRequiredLevel('required');
+                formContext.getAttribute('email').setRequiredLevel('required');
                 break;
             }
         case 3: //Preferred Method = Phone
             {
                 clearAllMandatoryFields();
-                Xrm.Page.getAttribute('mobilephone').setRequiredLevel('required');
+                formContext.getAttribute('mobilephone').setRequiredLevel('required');
                 break;
             }
     }
 }
 
-function clearAllMandatoryFields() {
+function clearAllMandatoryFields(formContext) {
 
-    Xrm.Page.getAttribute('email').setRequiredLevel('none');
-    Xrm.Page.getAttribute('mobilephone').setRequiredLevel('none');
+    formContext.getAttribute('email').setRequiredLevel('none');
+    formContext.getAttribute('mobilephone').setRequiredLevel('none');
 }
 
 function ExtentInvestment(numberOfMonths) {
@@ -107,7 +108,7 @@ function SetMatured() {
         lookupVal[0].name = Xrm.Page.data.entity.firstname;
 
         lookupVal[0].entityType = "contact";
-        Xrm.Page.getAttribute('StatusCode').setValue('Matured');
+        Xrm.Page.getAttribute('statusCode').setValue('Matured');
 
         Xrm.Page.data.entity.save();
 
