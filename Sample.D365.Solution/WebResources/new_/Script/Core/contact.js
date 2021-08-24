@@ -61,32 +61,35 @@ function validatePreferredMethodOfCommunication(executionContext) {
 
     switch (PreferredMethodOfCommunication) {
         case 1: // Preferred Method = Any
-            clearAllMandatoryFields();
+            clearAllMandatoryFields(formContext);
             break;
         case 2: // Preferred Method = Email
             {
-                clearAllMandatoryFields();
-                formContext.getAttribute('email').setRequiredLevel('required');
+                clearAllMandatoryFields(formContext);
+                formContext.getAttribute('emailaddress1').setRequiredLevel('required');
                 break;
             }
         case 3: //Preferred Method = Phone
             {
-                clearAllMandatoryFields();
+                clearAllMandatoryFields(formContext);
                 formContext.getAttribute('mobilephone').setRequiredLevel('required');
                 break;
             }
+        default:
+            clearAllMandatoryFields(formContext);
+            break;
     }
 }
 
 function clearAllMandatoryFields(formContext) {
 
-    formContext.getAttribute('email').setRequiredLevel('none');
+    formContext.getAttribute('emailaddress1').setRequiredLevel('none');
     formContext.getAttribute('mobilephone').setRequiredLevel('none');
 }
 
-function ExtentInvestment(numberOfMonths) {
+function ExtentInvestment(numberOfMonths, primaryControl) {
     //var contact = Xrm.Page.data.entity;
-
+    console.log(primaryControl);
     Xrm.Page.data.entity.InvestmentPeriodMonths += numberOfMonths;
 
     Xrm.Page.data.entity.save();
