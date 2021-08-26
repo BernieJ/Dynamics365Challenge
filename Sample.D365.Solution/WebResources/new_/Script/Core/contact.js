@@ -88,36 +88,40 @@ function clearAllMandatoryFields(formContext) {
 }
 
 function ExtentInvestment(numberOfMonths, primaryControl) {
-    //var contact = Xrm.Page.data.entity;
-    console.log(primaryControl);
-    Xrm.Page.data.entity.InvestmentPeriodMonths += numberOfMonths;
+    var value = parseInt(primaryControl.getControl('cr53a_investmentperiodmonths').getValue());
+    var newInvestmentPeriod = value + numberOfMonths;
+    primaryControl.getAttribute('cr53a_investmentperiodmonths').setValue(newInvestmentPeriod);
 
-    Xrm.Page.data.entity.save();
+    primaryControl.data.entity.save();
 
-    Xrm.Page.data.refresh();
+    setTimeout(function () {
+        // Call the Open Entity Form method and pass through the current entity name and ID to force CRM to reload the record
+
+        Xrm.Utility.openEntityForm(primaryControl.data.entity.getEntityName(), primaryControl.data.entity.getId());
+    }, 3000);
 }
 
-function SetMatured() {
+function SetMatured(primaryControl) {
     var date = new Date();
 
-    if (Xrm.Page.data.entity.InvestmentPeriodMonths <= date) {
+    var investmentPeriod = parseInt(primaryControl.getAttribute('cr53a_investmentperiodmonths').getValue());
+    var joinDate = new Date(primaryControl.getAttribute('cr53a_joiningdate').getValue());
 
-        var lookupVal = new Array();
+    var maturityDate = new Date(joinDate.setMonth(joinDate.getMonth() + investmentPeriod));
 
-        lookupVal[0] = new Object();
+    if (maturityDate <= date) {
 
-        lookupVal[0].id = Xrm.Page.data.entity.contactid;
+        primaryControl.getAttribute('statuscode').setValue('Matured');
 
-        lookupVal[0].name = Xrm.Page.data.entity.firstname;
+        primaryControl.data.entity.save();
 
-        lookupVal[0].entityType = "contact";
-        Xrm.Page.getAttribute('statusCode').setValue('Matured');
+        setTimeout(function () {
+            // Call the Open Entity Form method and pass through the current entity name and ID to force CRM to reload the record
 
-        Xrm.Page.data.entity.save();
-
-        Xrm.Page.data.refresh();
+            Xrm.Utility.openEntityForm(primaryControl.data.entity.getEntityName(), primaryControl.data.entity.getId());
+        }, 3000);
     }
     else {
-        Xrm.Page.ui.setFormNotification("Investment havn't matured yet. Maturity date is" + Xrm.Page.data.entity.InvestmentPeriodMonths.toString());
+        primaryControl.ui.setFormNotification("Investment havn't matured yet. Maturity date is" + maturityDate, "INFO", Date.now());
     }
 }
