@@ -111,7 +111,8 @@ function SetMatured(primaryControl) {
 
     if (maturityDate <= date) {
 
-        primaryControl.getAttribute('statuscode').setValue('Matured');
+        primaryControl.getAttribute('statuscode').setValue(2);
+        primaryControl.getAttribute('statecode').setValue(1);
 
         primaryControl.data.entity.save();
 
@@ -122,6 +123,6 @@ function SetMatured(primaryControl) {
         }, 3000);
     }
     else {
-        primaryControl.ui.setFormNotification("Investment havn't matured yet. Maturity date is" + maturityDate, "INFO", Date.now());
+        primaryControl.ui.setFormNotification("Investment havn't matured yet. Maturity date is " + maturityDate.toDateString(), "INFO", Date.now());
     }
 }
