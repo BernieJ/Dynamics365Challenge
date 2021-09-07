@@ -16,28 +16,36 @@ namespace Sample.D365.Plugins
 
         protected override void ExecuteCrmPlugin(LocalPluginContext localcontext)
         {
-            Entity followup = new Entity("task");
-
-            followup["subject"] = "First follow up meeting";
-            followup["description"] =
-                "Create first follow up meeting with" + localcontext.PluginExecutionContext.PrimaryEntityName;
-            followup["scheduledstart"] = DateTime.Now.AddDays(7);
-            followup["scheduledend"] = DateTime.Now.AddDays(7);
-            followup["category"] = localcontext.PluginExecutionContext.PrimaryEntityName;
-
-            // Refer to the account in the task activity.
-            if (localcontext.PluginExecutionContext.OutputParameters.Contains("id"))
+            try
             {
-                Guid regardingobjectid = new Guid(localcontext.PluginExecutionContext.OutputParameters["id"].ToString());
-                string regardingobjectidType = "contact";
+                Entity followup = new Entity("task");
 
-                followup["regardingobjectid"] =
-                new EntityReference(regardingobjectidType, regardingobjectid);
+                followup["subject"] = "First follow up meeting";
+                followup["description"] =
+                    "Create first follow up meeting with" + localcontext.PluginExecutionContext.PrimaryEntityName;
+                followup["scheduledstart"] = DateTime.Now.AddDays(7);
+                followup["scheduledend"] = DateTime.Now.AddDays(7);
+                followup["category"] = localcontext.PluginExecutionContext.PrimaryEntityName;
+
+                // Refer to the account in the task activity.
+                if (localcontext.PluginExecutionContext.OutputParameters.Contains("id"))
+                {
+                    Guid regardingobjectid = new Guid(localcontext.PluginExecutionContext.OutputParameters["id"].ToString());
+                    string regardingobjectidType = "contact";
+
+                    followup["regardingobjectid"] =
+                    new EntityReference(regardingobjectidType, regardingobjectid);
+                }
+
+
+                localcontext.TracingService.Trace("FollowupPlugin: Creating the task activity.");
+                localcontext.OrganizationService.Create(followup);
             }
-
-
-            localcontext.TracingService.Trace("FollowupPlugin: Creating the task activity.");
-            localcontext.OrganizationService.Create(followup);
+            catch (Exception ex)
+            {
+                localcontext.TracingService.Trace(ex.ToString());
+                throw;
+            }
         }
     }
 }
